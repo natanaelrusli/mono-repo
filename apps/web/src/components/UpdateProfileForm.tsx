@@ -10,6 +10,7 @@ import UpdateButton from "@/components/UpdateButton";
 import { setAuthState } from "@/store/actions";
 import withReduxProvider from "@/hoc/withReduxProvider"; // Import the HOC
 import { useAppSelector } from "@/store";
+import { validateEmail } from "utils"
 
 const UpdateProfileForm = () => {
   const [name, setName] = useState("");
@@ -43,6 +44,14 @@ const UpdateProfileForm = () => {
       dispatch(setAuthState({
         progressState: 'error',
         message: "Name and email are required."
+      }));
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      dispatch(setAuthState({
+        progressState: 'error',
+        message: "Invalid email address"
       }));
       return;
     }

@@ -28,7 +28,8 @@
     "firebase": "^11.1.0",
     "jsonwebtoken": "^9.0.2",
     "winston": "^3.17.0",
-    "shared-types": "*"
+    "shared-types": "*",
+    "utils": "*"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

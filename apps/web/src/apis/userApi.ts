@@ -1,7 +1,8 @@
 import { useMutation, UseMutationResult, useQuery, UseQueryResult } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-import { User } from "shared-types"
-import { ApiResponse, LoginCredentials, LoginResponse, UpdateProfilePayload } from "./types";
+import { User } from "shared-types/Entities";
+import { LoginCredentials, UpdateProfilePayload } from "shared-types/ApiRequests";
+import { ApiResponse, LoginResponse } from "shared-types/ApiResponses";
 import { ApiError } from "next/dist/server/api-utils";
 import { ErrorWithStatusCode } from "@/errors/errorWithStatusCode";
 

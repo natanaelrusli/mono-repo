@@ -24,7 +24,8 @@
     "react-dom": "^18",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
-    "shared-types": "*"
+    "shared-types": "*",
+    "utils": "*"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",

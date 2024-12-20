@@ -1,14 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
-import { User } from "shared-types";
+import { User } from "shared-types/Entities";
+import { UpdateProfilePayload, LoginCredentials } from "shared-types/ApiRequests"
 
 import { UserCollection } from "../repository/userCollection";
 import { db } from "../config/firebaseConfig";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { ResponseError } from "../errors/responseError";
 import { sendResponse } from "../utils/responseHelper";``
-import { validateEmail } from "../utils/validate";
+import { validateEmail } from "utils";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
@@ -52,7 +53,7 @@ export class UserController {
 
   static async updateUser(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     const requestUser = req.user as User;
-    const { name, email } = req.body as Partial<User>;
+    const { name, email } = req.body as Partial<UpdateProfilePayload>;
 
     try {
       if (email === requestUser.email && name === requestUser.name) {
@@ -91,7 +92,7 @@ export class UserController {
   }
 
   static async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { email, password } = req.body as User;
+    const { email, password } = req.body as LoginCredentials;
 
     try {
       const userData = await UserCollection.getOneUserByEmail(db, email);

@@ -1,0 +1,14 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "typescript": "latest"
+  },
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "keywords": [],
+  "author": "Nata Nael",
+  "license": "ISC"
+}
