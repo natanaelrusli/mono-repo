@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { collection, Firestore, getDocs, getFirestore } from 'firebase/firestore/lite';
-import { User } from "../entities/user";
+import { getFirestore } from 'firebase/firestore/lite';
 import dotenv from "dotenv";
 
 dotenv.config();

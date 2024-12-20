@@ -141,6 +141,9 @@ importers:
       redux-persist:
         specifier: ^6.0.0
         version: 6.0.0(react@18.0.0)(redux@5.0.1)
+      shared-types:
+        specifier: '*'
+        version: link:../../packages/shared-types
     devDependencies:
       '@types/js-cookie':
         specifier: ^3.0.6
@@ -210,6 +213,12 @@ importers:
         version: 8.15.0(eslint@9.15.0)(typescript@5.5.4)
 
   packages/math-helpers:
+    dependencies:
+      typescript:
+        specifier: latest
+        version: 5.7.2
+
+  packages/shared-types:
     dependencies:
       typescript:
         specifier: latest
