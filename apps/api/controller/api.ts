@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
+import { User } from "shared-types";
+
 import { UserCollection } from "../repository/userCollection";
 import { db } from "../config/firebaseConfig";
 import { AuthRequest } from "../middleware/authMiddleware";
-import { User } from "../entities/user";
 import { ResponseError } from "../errors/responseError";
-import { sendResponse } from "../utils/responseHelper";  // Import the response helper
+import { sendResponse } from "../utils/responseHelper";``
 import { validateEmail } from "../utils/validate";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
@@ -33,6 +34,10 @@ export class UserController {
     const { email, password, name } = req.body;
 
     try {
+      if (!validateEmail(email)) {
+        throw new ResponseError(400, "Invalid Email");
+      }
+
       const emailExists = await UserCollection.getOneUserByEmail(db, email);
       if (emailExists) {
         throw new ResponseError(400, "Email already exists.");
@@ -50,6 +55,10 @@ export class UserController {
     const { name, email } = req.body as Partial<User>;
 
     try {
+      if (email === requestUser.email && name === requestUser.name) {
+        throw new ResponseError(400, "No updated data provided");
+      }
+
       if (!email) {
         throw new ResponseError(400, "Please provide data to update");
       }
@@ -91,7 +100,7 @@ export class UserController {
 
       if (isPasswordValid) {
         const token = jwt.sign(
-          { userId: userData?.userId, email: userData?.email },
+          { userId: userData?.userId, email: userData?.email, name: userData?.name },
           JWT_SECRET,
           { expiresIn: "1h" }
         );
